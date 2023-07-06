@@ -1,9 +1,9 @@
 
 
 .sidebar-container {
-    width: 90px;
+    width: 110px;
 
-    border-right: 1px solid #4AB2C9;
+    border-right: 1px solid var(--main);
     display: flex;
     flex-direction: column;
 
@@ -16,9 +16,15 @@
     padding: 0;
 }
 
+.sidebar-icon {
+    width: 32px;
+    height: 41px;
+}
+
 .sidebar-container .home-icon{
     margin-bottom: 50px;
 }
+
 .sidebar-container li {
     margin-bottom: 45px;
 }
@@ -32,10 +38,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    height: 72px;
 }
 
-.sidebar-item .icon-text {
-    margin-top: 12px;
-    color: #A8A8A8;
+.icon-text {
+    margin-top: 8px;
+    color: var(--subgray);
     font-size: 0.8rem;
+    font-weight: 600;
+}
+
+
+.icon-text.active {
+    color: var(--main);
 }

@@ -1,11 +1,11 @@
-import React, { useMemo } from 'react';
-import { FaMapMarkerAlt, FaHeart, FaUser, FaRecycle } from 'react-icons/fa';
-import { BsArrow90DegRight } from 'react-icons/bs';
-import { MdOutlineMarkEmailUnread } from 'react-icons/md';
 import PropTypes from 'prop-types';
+import React, { useMemo } from 'react';
+
+import { COLORS } from '../../styles/colors';
+import { ArticleIcon, BookMarkIcon, LogoIcon, MapIcon, MyPageIcon, PathIcon } from './sidebar-icons';
+import SideBarItem from './SideBarItem';
 
 import '../../styles/common/SideBar.css';
-import SideBarItem from './SideBarItem';
 
 SideBar.propTypes = {
   onClick: PropTypes.func,
@@ -18,27 +18,27 @@ function SideBar({ onClick, selectedMenu }) {
       {
         id: 1,
         name: '지도 홈',
-        icon: <FaMapMarkerAlt size={40} color={selectedMenu === '지도 홈' ? '#4AB2C9' : '#A8A8A8'} />,
+        icon: <MapIcon fill={selectedMenu === '지도 홈' ? COLORS.main : COLORS.subgray} />,
       },
       {
         id: 2,
         name: '길찾기',
-        icon: <BsArrow90DegRight size={30} color={selectedMenu === '길찾기' ? '#4AB2C9' : '#A8A8A8'} />,
+        icon: <PathIcon fill={selectedMenu === '길찾기' ? COLORS.main : COLORS.subgray} />,
       },
       {
         id: 3,
         name: '상점 아티클',
-        icon: <MdOutlineMarkEmailUnread size={30} color={selectedMenu === '상점 아티클' ? '#4AB2C9' : '#A8A8A8'} />,
+        icon: <ArticleIcon stroke={selectedMenu === '상점 아티클' ? COLORS.main : COLORS.subgray} />,
       },
       {
         id: 4,
         name: '북마크',
-        icon: <FaHeart size={30} color={selectedMenu === '북마크' ? '#4AB2C9' : '#A8A8A8'} />,
+        icon: <BookMarkIcon fill={selectedMenu === '북마크' ? COLORS.main : COLORS.subgray} />,
       },
       {
         id: 5,
         name: '마이페이지',
-        icon: <FaUser size={30} color={selectedMenu === '마이페이지' ? '#4AB2C9' : '#A8A8A8'} />,
+        icon: <MyPageIcon fill={selectedMenu === '마이페이지' ? COLORS.main : COLORS.subgray} />,
       },
     ],
     [selectedMenu]
@@ -49,12 +49,14 @@ function SideBar({ onClick, selectedMenu }) {
       <ul>
         <li className="home-icon">
           <SideBarItem>
-            <FaRecycle size={40} color="#4AB2C9" />
+            <LogoIcon />
           </SideBarItem>
         </li>
         {sideBarMenus.map((menu) => (
           <li key={menu.id} onClick={() => onClick(menu.name)}>
-            <SideBarItem name={menu.name}>{menu.icon}</SideBarItem>
+            <SideBarItem name={menu.name} selected={menu.name === selectedMenu}>
+              {menu.icon}
+            </SideBarItem>
           </li>
         ))}
       </ul>
