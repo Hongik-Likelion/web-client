@@ -6,6 +6,7 @@ import { ArticleIcon, BookMarkIcon, LogoIcon, MapIcon, MyPageIcon, PathIcon } fr
 import SideBarItem from './SideBarItem';
 
 import '../../styles/common/SideBar.css';
+import classNames from 'classnames';
 
 SideBar.propTypes = {
   onClick: PropTypes.func,
@@ -53,7 +54,11 @@ function SideBar({ onClick, selectedMenu }) {
           </SideBarItem>
         </li>
         {sideBarMenus.map((menu) => (
-          <li key={menu.id} onClick={() => onClick(menu.name)}>
+          <li
+            key={menu.id}
+            onClick={() => onClick(menu.name)}
+            className={classNames({ selected: menu.name === selectedMenu })}
+          >
             <SideBarItem name={menu.name} selected={menu.name === selectedMenu}>
               {menu.icon}
             </SideBarItem>
