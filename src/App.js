@@ -1,19 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+{
+  /*}
+import { Routes, Route, Link } from 'react-router-dom';
+*/
+}
+
+import Homepage from './pages/Homepage';
+import Bookmarkpage from './pages/Bookmarkpage';
+import MakeMap from './function/MakeMap';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+      <MakeMap />
+      <div className="InitPage">
+        <Homepage />
+      </div>
+      <Bookmarkpage />
+      {/*}
+      <nav>
+        <Link to="/bookmark">Bookmark</Link>
+      </nav>
+      <Routes>
+        <Route path="/bookmark" element={<Bookmarkpage />} />
+      </Routes>
+  */}
     </div>
   );
 }
