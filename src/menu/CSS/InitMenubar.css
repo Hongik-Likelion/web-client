@@ -56,12 +56,11 @@ img {
 #openbutton {
   position: fixed;
   margin: 0;
-  top: 408px;
+  top: 423px;
   left: 108.6px;
   width: 51px;
   height: 63px;
   border-style: solid;
   border-color: transparent;
-  border-right: #4ab2c9;
   border-width: 2px;
 }

@@ -5,9 +5,7 @@ import InitMenubar from '../menu/InitMenubar';
 function Homepage() {
   return (
     <div className="Home">
-      <div className="InitMenu">
-        <InitMenubar />
-      </div>
+      <InitMenubar />
     </div>
   );
 }
