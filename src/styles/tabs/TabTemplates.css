@@ -1,0 +1,10 @@
+
+
+
+.tab-container {
+    width: 425px;
+    max-height: 100vh;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+}

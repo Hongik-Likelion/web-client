@@ -1,0 +1,34 @@
+
+
+h3 {
+    padding: 10px;
+}
+
+.bookmark-option-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 30px;
+    
+}
+
+.bookmark-option-container span {
+    width: 50%;
+    height: 100%;
+    font-weight: 700;
+    text-align: center;
+
+    color: var(--subgray);
+    border-bottom: 1px solid var(--subgray);
+}
+
+.bookmark-option-container span:hover{
+    cursor: pointer;
+}
+
+.bookmark-option-container span.selected {
+    color: var(--black);
+    border-bottom: 1px solid var(--black);
+}
