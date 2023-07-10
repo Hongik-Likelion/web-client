@@ -1,0 +1,119 @@
+.navbar {
+    position : fixed;
+    left : 0;
+    top : 0;
+    width : 110px;
+    height : 100vh;
+  }
+  
+.icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.highlight {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #4AB2C9;
+}
+
+.box {
+    position : absolute;
+    right : 1px;
+    width: 5px;
+    height: 86px;
+    background-color: #4AB2C9;
+}
+
+.mainIcon {
+    width:59px;
+    height:46px;
+    background-image: url('./icon/mainIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.mapsIcon {
+    width:42px;
+    height:72px;
+    background-image: url('./icon/mapsIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.mapsSelectIcon {
+    width:42px;
+    height:72px;
+    background-image: url('./icon/mapsSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.directionIcon {
+    width:42px;
+    height:71px;
+    background-image: url('./icon/directionIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.directionSelectIcon {
+    width:42px;
+    height:71px;
+    background-image: url('./icon/directionSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.articleIcon {
+    width:74px;
+    height:71px;
+    background-image: url('./icon/articleIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.articleSelectIcon {
+    width:74px;
+    height:71px;
+    background-image: url('./icon/articleSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.bookmarkIcon {
+    width:42px;
+    height:65px;
+    background-image: url('./icon/bookmarkIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.bookmarkSelectIcon {
+    width:42px;
+    height:65px;
+    background-image: url('./icon/bookmarkSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.mypageIcon {
+    width:74px;
+    height:74px;
+    background-image: url('./icon/mypageIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.mypageSelectIcon {
+    width:74px;
+    height:74px;
+    background-image: url('./icon/mypageSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
