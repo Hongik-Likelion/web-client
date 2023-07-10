@@ -3,6 +3,7 @@ import SideBar from '../components/common/SideBar';
 import KakaoMap from '../components/KakaoMap';
 
 import '../styles/pages/Home.css';
+import Tabs from '../components/tabs/Tabs';
 
 function Home() {
   /**
@@ -14,6 +15,7 @@ function Home() {
   return (
     <div className="home-container">
       <SideBar onClick={clickMenu} selectedMenu={selectedMenu} />
+      <Tabs selected={selectedMenu} />
       <KakaoMap />
     </div>
   );
