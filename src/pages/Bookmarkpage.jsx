@@ -21,7 +21,7 @@ function Bookmarkpage() {
           <GetBookmarkAPI />
         </div>
       </div>
-      <img id="closeButton" src="/buttonImg/closeButton.png" />
+      <img id="closedButton" src="/buttonImg/closeButton.png" />
     </div>
   );
 }

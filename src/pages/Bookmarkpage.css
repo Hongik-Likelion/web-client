@@ -42,7 +42,7 @@
   border-bottom: 2px solid #d9d9d9;
 }
 
-#closeButton {
+#closedButton {
   position: fixed;
   margin-left: 476px;
   z-index: 2;
