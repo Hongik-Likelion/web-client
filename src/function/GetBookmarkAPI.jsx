@@ -1,18 +1,22 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function GetBookmarkAPI() {
-  const [details, setDetails] = useState([]);
+  const [details, setDetails] = useState([]); // details 상태 변수 추가
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/bookmark')
-      .then((res) => {
-        setDetails(res.data);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/bookmark');
+        const bookmarkData = response.data;
+        setDetails(bookmarkData); // 가져온 데이터를 details 상태에 설정
+        console.log(bookmarkData);
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
