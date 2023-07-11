@@ -34,7 +34,7 @@
 #thirdline {
   display: flex;
   margin-top: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
 }
 
 .distance {
@@ -52,12 +52,28 @@
   margin-left: 5px;
 }
 
+.tag {
+  font-size: 10px;
+  font-weight: bold;
+  color: #4ab2c9;
+  margin-left: 10px;
+  border: solid #4ab2c9;
+  border-radius: 10px;
+  border-width: 1px;
+  width: 168px;
+  height: 16px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 1px;
+  margin-bottom: 12px;
+}
+
 #cafeImg {
   display: flex;
   width: 88px;
   height: 88px;
   margin-top: 7px;
-  margin-left: 45px;
+  margin-left: 75px;
 }
 
 #greyBar {
