@@ -1,0 +1,69 @@
+#shop {
+  border-bottom: 2px solid #d9d9d9;
+  display: flex;
+}
+
+#firstline {
+  display: flex;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.shopName {
+  display: flex;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.open {
+  font-size: 8px;
+  font-weight: 600;
+  color: #4ab2c9;
+  margin-left: 10px;
+}
+
+.description {
+  display: flex;
+  margin-left: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+#thirdline {
+  display: flex;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.distance {
+  display: flex;
+  margin-left: 10px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.reviewCount {
+  display: flex;
+  font-size: 10px;
+  color: #6f6f6f;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+#cafeImg {
+  display: flex;
+  width: 88px;
+  height: 88px;
+  margin-top: 7px;
+  margin-left: 45px;
+}
+
+#greyBar {
+  display: flex;
+  width: 3px;
+  height: 15px;
+  margin-left: 8px;
+  margin-top: 7px;
+}
