@@ -1,17 +1,17 @@
-.navbar {
+/* .navbar {
     position : fixed;
     left : 0;
     top : 0;
     width : 110px;
     height : 100vh;
-  }
+  } */
   
-.icon {
+/* .icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .highlight {
     position: absolute;
@@ -30,13 +30,13 @@
     background-color: #4AB2C9;
 }
 
-.mainIcon {
+/* .mainIcon {
     width:59px;
     height:46px;
     background-image: url('./icon/mainIcon.svg');
     background-size: cover;
     margin-top : 40px;
-}
+} */
 
 .mapsIcon {
     width:42px;
