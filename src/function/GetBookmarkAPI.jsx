@@ -14,7 +14,7 @@ function GetBookmarkAPI() {
         setDetails(bookmarkData); // 가져온 데이터를 details 상태에 설정
         console.log(bookmarkData);
       } catch (error) {
-        console.error(error);
+        console.error(error); //state로 boolen 값을 가지는 것으로 호출 성공여부 관련을 따질 수 O (if 문으로 예외처리 하는 것이 good)
       }
     };
 
