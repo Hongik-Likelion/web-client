@@ -8,6 +8,8 @@ import FindWaypage from './pages/FindWaypage';
 import MapHomepage from './pages/MapHomepage';
 import MyPagepage from './pages/MyPagepage';
 
+import { MapIcon, FindWayIcon, ArticleIcon, BookMarkIcon, MypageIcon } from './components/menubarData';
+
 import './menu/CSS/InitMenubar.css';
 
 function App() {
@@ -19,19 +21,19 @@ function App() {
           <nav className="MainMenubar">
             <img id="zeroAround" src="/menuIcon/zeroAround.png" />
             <Link to="/mapHome">
-              <img id="mapHomeImg" src="/menuIcon/mapHomeImg.png" />
+              <MapIcon />
             </Link>
             <Link to="/findway">
-              <img id="findWay" src="/menuIcon/findWay.png" />
+              <FindWayIcon />
             </Link>
             <Link to="/article">
-              <img id="article" src="/menuIcon/article.png" />
+              <ArticleIcon />
             </Link>
             <Link to="/bookMark">
-              <img id="bookMark" src="/menuIcon/bookMark.png" />
+              <BookMarkIcon />
             </Link>
             <Link to="/myPage">
-              <img id="myPage" src="/menuIcon/myPage.png" />
+              <MypageIcon />
             </Link>
           </nav>
 
