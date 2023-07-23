@@ -8,7 +8,11 @@ import FindWaypage from './pages/FindWaypage';
 import MapHomepage from './pages/MapHomepage';
 import MyPagepage from './pages/MyPagepage';
 
-import { MapIcon, FindWayIcon, ArticleIcon, BookMarkIcon, MypageIcon } from './components/menubarData';
+import { ReactComponent as MapIcon } from './components/MapIcon.svg';
+import { ReactComponent as FindWayIcon } from './components/FindWayIcon.svg';
+import { ReactComponent as ArticleIcon } from './components/ArticleIcon.svg';
+import { ReactComponent as BookMarkIcon } from './components/BookMarkIcon.svg';
+import { ReactComponent as MyPageIcon } from './components/MyPageIcon.svg';
 
 import './menu/CSS/InitMenubar.css';
 
@@ -33,7 +37,7 @@ function App() {
               <BookMarkIcon />
             </Link>
             <Link to="/myPage">
-              <MypageIcon />
+              <MyPageIcon />
             </Link>
           </nav>
 
