@@ -1,6 +1,4 @@
 import React from 'react';
-
-import BookmarkMenubar from '../menu/BookmarkMenubar';
 import GetBookmarkAPI from '../function/GetBookmarkAPI';
 
 import './Bookmarkpage.css';
@@ -8,7 +6,6 @@ import './Bookmarkpage.css';
 function Bookmarkpage() {
   return (
     <div className="Home">
-      <BookmarkMenubar />
       <div className="bookmarkSidebar">
         <div id="bar">
           <div id="title">계용운님의 북마크</div>
