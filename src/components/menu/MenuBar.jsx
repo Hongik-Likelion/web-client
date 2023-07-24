@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as MapIcon } from '../components/MapIcon.svg';
-import { ReactComponent as FindWayIcon } from '../components/FindWayIcon.svg';
-import { ReactComponent as ArticleIcon } from '../components/ArticleIcon.svg';
-import { ReactComponent as BookMarkIcon } from '../components/BookMarkIcon.svg';
-import { ReactComponent as LoginIcon } from '../components/LoginIcon.svg';
+import { ReactComponent as MapIcon } from '../menuIcon/MapIcon.svg';
+import { ReactComponent as FindWayIcon } from '../menuIcon/FindWayIcon.svg';
+import { ReactComponent as ArticleIcon } from '../menuIcon/ArticleIcon.svg';
+import { ReactComponent as BookMarkIcon } from '../menuIcon/BookMarkIcon.svg';
+import { ReactComponent as LoginIcon } from '../menuIcon/LoginIcon.svg';
 
 import styled from 'styled-components';
 

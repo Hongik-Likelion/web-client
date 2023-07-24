@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './MakeMap.css';
+import styled from 'styled-components';
 
 const { kakao } = window;
 
@@ -71,16 +71,63 @@ const MakeMap = () => {
 
   return (
     <div>
-      <div id="map"></div>
-      <div id="rightMenu">
-        <img className="firstIcon" src="/mapImg/first.png" />
-        <img className="biggerIcon" src="/mapImg/second.png" />
-        <img className="biggerIcon" src="/mapImg/third.png" />
-        <img className="fourthIcon" src="/mapImg/four.png" />
-        <img className="fifthIcon" src="/mapImg/five.png" />
-      </div>
+      <MapContainer id="map"></MapContainer>
+      <RightMenu>
+        <FirstIcon src="/mapImg/first.png" />
+        <BiggerIcon src="/mapImg/second.png" />
+        <biggerIcon src="/mapImg/third.png" />
+        <FourthIcon src="/mapImg/four.png" />
+        <FifthIcon src="/mapImg/five.png" />
+      </RightMenu>
     </div>
   );
 };
+
+const MapContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`;
+
+const RightMenu = styled.div`
+  position: fixed;
+  display: flex;
+  width: 110px;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+`;
+
+const FirstIcon = styled.img`
+  width: 60px;
+  height: 63px;
+  margin-top: 80px;
+`;
+
+const BiggerIcon = styled.img`
+  width: 60px;
+  height: 157px;
+  margin-top: 8px;
+  margin-bottom: 0;
+`;
+
+const FourthIcon = styled.img`
+  width: 53px;
+  height: 53px;
+  margin: 0;
+  margin-top: 70px;
+`;
+
+const FifthIcon = styled.img`
+  width: 53px;
+  height: 53px;
+  margin: 0;
+  margin-top: 11px;
+`;
 
 export default MakeMap;

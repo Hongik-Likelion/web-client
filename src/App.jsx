@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import MakeMap from './function/MakeMap';
-import MenuBar from './menu/MenuBar';
+import MenuBar from './components/menu/MenuBar';
 
 import Bookmarkpage from './pages/Bookmarkpage';
 import Articlepage from './pages/Articlepage';
