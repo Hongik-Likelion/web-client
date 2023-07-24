@@ -4,17 +4,17 @@ import axios from 'axios';
 import './GetBookmarkAPI.css';
 
 function GetBookmarkAPI() {
-  const [details, setDetails] = useState([]); // details 상태 변수 추가
+  const [details, setDetails] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('http://localhost:8000/bookmark');
         const bookmarkData = response.data;
-        setDetails(bookmarkData); // 가져온 데이터를 details 상태에 설정
+        setDetails(bookmarkData);
         console.log(bookmarkData);
       } catch (error) {
-        console.error(error); //state로 boolen 값을 가지는 것으로 호출 성공여부 관련을 따질 수 O (if 문으로 예외처리 하는 것이 good)
+        console.error(error);
       }
     };
 
