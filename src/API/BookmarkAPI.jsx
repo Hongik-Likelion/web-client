@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-function GetBookmarkAPI() {
+function BookmarkAPI() {
   const [details, setDetails] = useState([]);
 
   useEffect(() => {
@@ -131,4 +131,4 @@ const GreyBarImg = styled.img`
   margin-top: 7px;
 `;
 
-export default GetBookmarkAPI;
+export default BookmarkAPI;

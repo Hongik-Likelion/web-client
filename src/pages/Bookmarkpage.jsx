@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import GetBookmarkAPI from '../function/GetBookmarkAPI';
+import BookmarkAPI from '../API/BookmarkAPI';
 
 function Bookmarkpage() {
   return (
@@ -14,7 +14,7 @@ function Bookmarkpage() {
           </MiddleBar>
         </Bar>
         <div>
-          <GetBookmarkAPI />
+          <BookmarkAPI />
         </div>
       </BookmarkSidebar>
       <ClosedButton src="/buttonImg/closedButton.png" />
@@ -25,7 +25,7 @@ function Bookmarkpage() {
 const BookmarkSidebar = styled.div`
   position: fixed;
   width: 375px;
-  height: 1080px;
+  height: 100vh;
   background-color: white;
   margin-left: 105px;
   margin-top: -8px;
@@ -70,7 +70,7 @@ const ArticleList = styled.div`
 
 const ClosedButton = styled.img`
   position: fixed;
-  margin-left: 476px;
+  margin-left: 470px;
   z-index: 2;
   margin-top: 412px;
 `;

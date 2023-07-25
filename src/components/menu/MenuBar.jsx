@@ -32,7 +32,7 @@ function MenuBar() {
         <Link to="/bookMark">
           <StyledBookMarkIcon fill={menu === 4 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(4)} />
         </Link>
-        <Link to="/myPage">
+        <Link to="/login">
           <StyledLoginIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
         </Link>
       </MainMenubar>
@@ -46,7 +46,7 @@ function MenuBar() {
 
 const BackMenu = styled.div`
   width: 110px;
-  height: 1080px;
+  height: 100vh;
 `;
 
 const MainMenubar = styled.div`
