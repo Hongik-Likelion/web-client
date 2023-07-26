@@ -40,7 +40,10 @@ function LoginPage() {
         <div>
           <FirstLine>카카오 계정을 통해 로그인 할 수 있어요!</FirstLine>
           <SecondLine>간편한 로그인을 통해 맞춤 추천 기능을 제공 받아보세요!</SecondLine>
-          <KakaoImg src="/buttonImg/kakaoLoginButton.png" />
+          <a href={process.env.REACT_APP_KAKAO_AUTH_URL}>
+            <KakaoImg src="/buttonImg/kakaoLoginButton.png" />
+          </a>
+
           <XButton src="/buttonImg/X.png" onClick={closeModal} />
         </div>
       </Modal>

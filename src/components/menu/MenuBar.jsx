@@ -11,14 +11,14 @@ import styled from 'styled-components';
 
 function MenuBar() {
   const [menu, setMenu] = useState(() => {
-    // LocalStorage에 저장된 값이 있으면 해당 값으로 초기화하고,없으면 기본값 0으로 초기화한다.
-    const storedMenu = localStorage.getItem('menu');
+    // sessionStorage에 저장된 값이 있으면 해당 값으로 초기화하고,없으면 기본값 0으로 초기화한다.
+    const storedMenu = sessionStorage.getItem('menu');
     return storedMenu ? Number(storedMenu) : 0;
   });
 
   useEffect(() => {
-    // 컴포넌트가 업데이트될 때마다 menu 값을 LocalStorage에 저장한다.
-    localStorage.setItem('menu', menu);
+    // 컴포넌트가 업데이트될 때마다 menu 값을 sessionStorage에 저장한다.
+    sessionStorage.setItem('menu', menu);
   }, [menu]);
 
   const handleMenuClick = (menuNumber) => {

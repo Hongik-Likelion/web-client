@@ -75,7 +75,7 @@ const KakaoMapAPI = () => {
       <RightMenu>
         <FirstIcon src="/mapImg/first.png" />
         <BiggerIcon src="/mapImg/second.png" />
-        <biggerIcon src="/mapImg/third.png" />
+        <BiggerIcon src="/mapImg/third.png" />
         <FourthIcon src="/mapImg/four.png" />
         <FifthIcon src="/mapImg/five.png" />
       </RightMenu>

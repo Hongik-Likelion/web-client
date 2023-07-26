@@ -23,7 +23,6 @@ function App() {
         <Route path="/login" element={<LoginPage />}></Route>
         <Route path="/myPage" element={<MyPage />}></Route>
       </Routes>
-
       <MenuBar />
     </div>
   );
