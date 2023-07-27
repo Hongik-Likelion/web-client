@@ -32,10 +32,19 @@ function Nav() {
                     <div className={selectNav === 5 ? "bookmarkSelectIcon" : "bookmarkIcon"}></div>
                     {(selectNav===5) && <div className="box" style={{top : `451px`}}></div>}
                 </Link>
-                <Link to="/mypage" onClick={() => setSelectNav(6)}>
-                    <div className={selectNav === 6 ? "mypageSelectIcon" : "mypageIcon"}></div>
+                
+                
+                <Link to="/kakao-login" onClick={() => setSelectNav(6)}>
+                    <div className={selectNav === 6 ? "loginSelectIcon" : "loginIcon"}></div>
                     {(selectNav===6) && <div className="box" style={{top : `556px`}}></div>}
                 </Link>
+
+        
+                {/* <Link to="/oauth" onClick={() => setSelectNav(7)}>
+                    <div className={selectNav === 7 ? "mypageSelectIcon" : "mypageIcon"}></div>
+                    {(selectNav===7) && <div className="box" style={{top : `556px`}}></div>}
+                </Link> */}
+                
             </Icon>
             {selectNav && <div className="highlight"></div>}
             

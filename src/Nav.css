@@ -102,7 +102,23 @@
     margin-top : 40px;
 }
 
-.mypageIcon {
+.loginIcon {
+    width:74px;
+    height:74px;
+    background-image: url('./icon/loginIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+.loginSelectIcon {
+    width:74px;
+    height:74px;
+    background-image: url('./icon/loginSelectIcon.svg');
+    background-size: cover;
+    margin-top : 40px;
+}
+
+/* .mypageIcon {
     width:74px;
     height:74px;
     background-image: url('./icon/mypageIcon.svg');
@@ -116,4 +132,4 @@
     background-image: url('./icon/mypageSelectIcon.svg');
     background-size: cover;
     margin-top : 40px;
-}
+} */

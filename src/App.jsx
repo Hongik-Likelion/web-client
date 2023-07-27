@@ -9,7 +9,8 @@ import Maps from "./pages/Maps";
 import Direction from "./pages/Direction";
 import Article from "./pages/Article";
 import Bookmark from "./pages/Bookmark";
-import Mypage from "./pages/Mypage";
+import Login from "./pages/Login";
+import KakaoCallBack from "./pages/KakaoCallBack";
 
 function App() {
   return (
@@ -28,7 +29,8 @@ function App() {
           <Route path="/direction" element={<Direction />} />
           <Route path="/article" element={<Article />} />
           <Route path="/bookmark" element={<Bookmark />} />
-          <Route path="/mypage" element={<Mypage />} />
+          <Route path="/kakao-login" element={<Login />} />
+          <Route path="/oauth" element={<KakaoCallBack />} /> {/*리다이렉트 페이지*/}
         </Routes>
     </>
   );

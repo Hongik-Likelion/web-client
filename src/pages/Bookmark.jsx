@@ -4,7 +4,7 @@ import './Bookmark.css';
 import styled from "styled-components";
 
 function Bookmark() {
-    const [bookmark, setBookmark] = useState();
+    const [bookmark, setBookmark] = useState(null);
     const [click, setClick] = useState(true); //true일 때 리스트 클릭됐다고 가정
     
     useEffect(()=>{
