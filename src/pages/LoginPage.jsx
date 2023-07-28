@@ -60,6 +60,7 @@ function LoginPage() {
 
       <BackGroundEffect></BackGroundEffect>
       <ClosedButton src="/buttonImg/closedButton.png" />
+      <LoginpageSelectionBar src="/menuIcon/selectedBar.png" />
     </div>
   );
 }
@@ -147,6 +148,13 @@ const ClosedButton = styled.img`
   margin-left: 470px;
   z-index: 2;
   margin-top: 412px;
+`;
+
+const LoginpageSelectionBar = styled.img`
+  position: fixed;
+  margin-left: 100px;
+  margin-top: 520px;
+  z-index: 2;
 `;
 
 export default LoginPage;

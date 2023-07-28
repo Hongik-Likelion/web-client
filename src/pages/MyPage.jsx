@@ -83,7 +83,7 @@ function MyPage() {
           setKakaoNickname(nickname);
           setKakaoProfileImg(profileImg);
           setKakaoEmail(email);
-          setUserDataFetched(true); // Set user data fetched status to true
+          setUserDataFetched(true);
         })
         .catch((error) => {
           console.error('Error occurred during API request:', error);
@@ -150,6 +150,7 @@ function MyPage() {
       </MyPageSidebar>
 
       <ClosedButton src="/buttonImg/closedButton.png" />
+      <MypageSelectionBar src="/menuIcon/selectedBar.png" />
     </div>
   );
 }
@@ -248,6 +249,13 @@ const UserInfoValue = styled.div`
   margin-left: 10px;
   margin-top: 2px;
   font-size: 14px;
+`;
+
+const MypageSelectionBar = styled.img`
+  position: fixed;
+  margin-left: 100px;
+  margin-top: 520px;
+  z-index: 2;
 `;
 
 export default MyPage;

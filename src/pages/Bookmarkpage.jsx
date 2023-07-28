@@ -18,6 +18,7 @@ function Bookmarkpage() {
         </div>
       </BookmarkSidebar>
       <ClosedButton src="/buttonImg/closedButton.png" />
+      <BookmarkPageSelectionBar src="/menuIcon/selectedBar.png" />
     </div>
   );
 }
@@ -73,6 +74,13 @@ const ClosedButton = styled.img`
   margin-left: 470px;
   z-index: 2;
   margin-top: 412px;
+`;
+
+const BookmarkPageSelectionBar = styled.img`
+  position: fixed;
+  margin-left: 100px;
+  margin-top: 415px;
+  z-index: 2;
 `;
 
 export default Bookmarkpage;
