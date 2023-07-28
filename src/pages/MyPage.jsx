@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { LoginInfo } from '../context/LoginUseContext';
 
 function MyPage() {
   const [kakaoNickname, setKakaoNickname] = useState('');
-  const [kakakoProfileImg, setKakaoProfileImg] = useState('');
+  const [kakaoProfileImg, setKakaoProfileImg] = useState('');
   const [kakaoEmail, setKakaoEmail] = useState('');
+
+  const [userDataFetched, setUserDataFetched] = useState(false);
+  const { kakaoAccessToken, setKakaoAccessToken } = useContext(LoginInfo); //전역변수로 kakakoAccessToken 설정
 
   useEffect(() => {
     //authorization_code 받아오기
@@ -26,42 +30,36 @@ function MyPage() {
             },
           }
         )
-
         .then((res) => {
-          //Access Token으로 사용자 정보 받아오기
           console.log(res);
+
           const { data } = res;
           const { access_token } = data;
+          setKakaoAccessToken(access_token);
 
-          if (access_token) {
-            console.log(`Bearer ${access_token}`);
-            axios
-              .post(
-                'https://kapi.kakao.com/v2/user/me',
-                {},
-                {
-                  headers: {
-                    Authorization: `Bearer ${access_token}`,
-                    'Content-type': 'application/x-www-form-urlencoded',
-                  },
-                }
-              )
+          axios
+            .post(
+              'https://kapi.kakao.com/v2/user/me',
+              {},
+              {
+                headers: {
+                  Authorization: `Bearer ${access_token}`,
+                  'Content-type': 'application/x-www-form-urlencoded',
+                },
+              }
+            )
+            .then((res) => {
+              console.log(res);
 
-              //필요한 정보 저장
-              .then((res) => {
-                console.log(res);
+              const nickname = res.data.properties.nickname;
+              const profileImg = res.data.properties.profile_image;
+              const email = res.data.kakao_account.email;
 
-                const nickname = res.data.properties.nickname;
-                const profileImg = res.data.properties.profile_image;
-                const email = res.data.kakao_account.email;
-
-                setKakaoNickname(nickname);
-                setKakaoProfileImg(profileImg);
-                setKakaoEmail(email);
-              });
-          } else {
-            console.log('access_token 없는 오류 발생!');
-          }
+              setKakaoNickname(nickname);
+              setKakaoProfileImg(profileImg);
+              setKakaoEmail(email);
+              setUserDataFetched(true); // Set user data fetched status to true
+            });
         })
         .catch((error) => {
           console.error('Error occurred during API request:', error);
@@ -69,14 +67,37 @@ function MyPage() {
     }
   }, []);
 
+  const handleKakaoLogout = () => {
+    if (kakaoAccessToken) {
+      axios
+        .post(
+          'https://kapi.kakao.com/v1/user/logout',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${kakaoAccessToken}`,
+              'Content-type': 'application/x-www-form-urlencoded',
+            },
+          }
+        )
+        .then((res) => {
+          console.log('카카오 로그아웃 성공:', res);
+          setKakaoAccessToken(''); // 로그아웃 성공 후에 kakaoAccessToken 상태를 초기화
+          window.location.href = '/login'; // 로그아웃 성공 후 /login 페이지로 리다이렉트
+        })
+        .catch((error) => {
+          console.error('카카오 로그아웃 오류:', error);
+        });
+    }
+  };
+
   return (
     <div>
       <MyPageSidebar>
         <Userbar>
-          {/*이제 이 img 눌렀을때, 로그아웃되는 API 해야함. */}
-          <LogoutButtonImg src="/buttonImg/logoutButton.png" />
+          {userDataFetched && <LogoutButtonImg src="/buttonImg/logoutButton.png" onClick={handleKakaoLogout} />}
 
-          <CircleImg>{kakakoProfileImg && <ProfileImg src={kakakoProfileImg} alt="Kakao Profile" />}</CircleImg>
+          <CircleImg>{kakaoProfileImg && <ProfileImg src={kakaoProfileImg} alt="Kakao Profile" />}</CircleImg>
           <EditButtonImg src="/buttonImg/editbutton.png" />
           <UserNickname>{kakaoNickname} 님</UserNickname>
 
