@@ -9,64 +9,91 @@ function MyPage() {
   const [kakaoEmail, setKakaoEmail] = useState('');
 
   const [userDataFetched, setUserDataFetched] = useState(false);
-  const { kakaoAccessToken, setKakaoAccessToken } = useContext(LoginInfo); //전역변수로 kakakoAccessToken 설정
+  const [kakaoAccessToken, setKakaoAccessToken] = useState('');
+
+  const { setLoggedInUser } = useContext(LoginInfo); // useContext 가져온 부분
 
   useEffect(() => {
-    //authorization_code 받아오기
-    const params = new URL(window.location.href).searchParams;
-    const code = params.get('code');
-    const grant_type = 'authorization_code';
-    const client_id = process.env.REACT_APP_CLIENT_ID;
-    const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
+    const accessToken = localStorage.getItem('accessToken');
 
-    if (code) {
+    if (accessToken) {
+      setKakaoAccessToken(accessToken);
+      setLoggedInUser(true);
+    } else {
+      // 로컬 스토리지에 액세스 토큰이 없는 경우 인가코드 받기부터 시작
+      const params = new URL(window.location.href).searchParams;
+      const code = params.get('code');
+      const grant_type = 'authorization_code';
+      const client_id = process.env.REACT_APP_CLIENT_ID;
+      const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
+
+      if (code) {
+        axios
+          .post(
+            `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${redirect_uri}&code=${code}`,
+            {},
+            {
+              headers: {
+                'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+              },
+            }
+          )
+          .then((res) => {
+            console.log(res);
+
+            const { data } = res;
+            const { access_token } = data;
+
+            setKakaoAccessToken(access_token);
+            // 액세스 토큰을 로컬 스토리지에 저장
+            localStorage.setItem('accessToken', access_token);
+          })
+          .catch((error) => {
+            console.error('Error occurred during API request:', error);
+          });
+      } else {
+        // 로그인 페이지로 이동
+        window.location.href = '/login';
+      }
+    }
+  }, [setLoggedInUser]);
+
+  useEffect(() => {
+    if (kakaoAccessToken) {
+      // 액세스 토큰이 있는 경우에만 사용자 정보를 가져오도록 함
       axios
         .post(
-          `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${redirect_uri}&code=${code}`,
+          'https://kapi.kakao.com/v2/user/me',
           {},
           {
             headers: {
-              'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+              Authorization: `Bearer ${kakaoAccessToken}`,
+              'Content-type': 'application/x-www-form-urlencoded',
             },
           }
         )
         .then((res) => {
+          setLoggedInUser(true);
           console.log(res);
 
-          const { data } = res;
-          const { access_token } = data;
-          setKakaoAccessToken(access_token);
+          const nickname = res.data.properties.nickname;
+          const profileImg = res.data.properties.profile_image;
+          const email = res.data.kakao_account.email;
 
-          axios
-            .post(
-              'https://kapi.kakao.com/v2/user/me',
-              {},
-              {
-                headers: {
-                  Authorization: `Bearer ${access_token}`,
-                  'Content-type': 'application/x-www-form-urlencoded',
-                },
-              }
-            )
-            .then((res) => {
-              console.log(res);
-
-              const nickname = res.data.properties.nickname;
-              const profileImg = res.data.properties.profile_image;
-              const email = res.data.kakao_account.email;
-
-              setKakaoNickname(nickname);
-              setKakaoProfileImg(profileImg);
-              setKakaoEmail(email);
-              setUserDataFetched(true); // Set user data fetched status to true
-            });
+          setKakaoNickname(nickname);
+          setKakaoProfileImg(profileImg);
+          setKakaoEmail(email);
+          setUserDataFetched(true); // Set user data fetched status to true
         })
         .catch((error) => {
           console.error('Error occurred during API request:', error);
+          // 만약 에러가 발생하면 로그아웃 처리 후 로그인 페이지로 이동
+          handleKakaoLogout();
         });
     }
-  }, []);
+  }, [kakaoAccessToken]);
 
+  // 로그아웃 부분
   const handleKakaoLogout = () => {
     if (kakaoAccessToken) {
       axios
@@ -83,6 +110,8 @@ function MyPage() {
         .then((res) => {
           console.log('카카오 로그아웃 성공:', res);
           setKakaoAccessToken(''); // 로그아웃 성공 후에 kakaoAccessToken 상태를 초기화
+          localStorage.removeItem('accessToken'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
+          setLoggedInUser(false);
           window.location.href = '/login'; // 로그아웃 성공 후 /login 페이지로 리다이렉트
         })
         .catch((error) => {

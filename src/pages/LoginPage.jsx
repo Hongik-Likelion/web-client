@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Modal from 'react-modal';
 import styled from 'styled-components';
 
 function LoginPage() {
   const [openModal, setModalOpen] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    //이미 로그인이 되어 있다면, 바로 mypage로 이동
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      navigate('/mypage');
+    }
+  }, [navigate]);
 
   const closeModal = () => {
     setModalOpen(false);

@@ -13,22 +13,22 @@ import LoginPage from './pages/LoginPage';
 import MyPage from './pages/MyPage';
 
 function App() {
-  const [kakaoAccessToken, setKakaoAccessToken] = useState(''); //전역변수 설정
+  const [loggedInUser, setLoggedInUser] = useState(''); // 로그인 상태와 상태 변경 함수 선언
 
   return (
     <div className="App">
       <KakaoMapAPI />
-      <LoginInfo.Provider value={{ kakaoAccessToken, setKakaoAccessToken }}>
+      <LoginInfo.Provider value={{ loggedInUser, setLoggedInUser }}>
         <Routes>
           <Route path="/mapHome" element={<MapHomepage />}></Route>
           <Route path="/findway" element={<FindWaypage />}></Route>
           <Route path="/article" element={<Articlepage />}></Route>
           <Route path="/bookMark" element={<Bookmarkpage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/myPage" element={<MyPage />}></Route>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/myPage" element={<MyPage />} />
         </Routes>
+        <MenuBar />
       </LoginInfo.Provider>
-      <MenuBar />
     </div>
   );
 }

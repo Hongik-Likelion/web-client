@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ReactComponent as MapIcon } from '../menuIcon/MapIcon.svg';
@@ -6,10 +6,16 @@ import { ReactComponent as FindWayIcon } from '../menuIcon/FindWayIcon.svg';
 import { ReactComponent as ArticleIcon } from '../menuIcon/ArticleIcon.svg';
 import { ReactComponent as BookMarkIcon } from '../menuIcon/BookMarkIcon.svg';
 import { ReactComponent as LoginIcon } from '../menuIcon/LoginIcon.svg';
+import { ReactComponent as SelectedArticleIcon } from '../menuIcon/SelectedArticleIcon.svg';
+import { ReactComponent as MyPageIcon } from '../menuIcon/MyPageIcon.svg';
+
+import { LoginInfo } from '../../context/LoginUseContext';
 
 import styled from 'styled-components';
 
 function MenuBar() {
+  const { loggedInUser } = useContext(LoginInfo);
+
   const [menu, setMenu] = useState(() => {
     // sessionStorage에 저장된 값이 있으면 해당 값으로 초기화하고,없으면 기본값 0으로 초기화한다.
     const storedMenu = sessionStorage.getItem('menu');
@@ -35,14 +41,19 @@ function MenuBar() {
         <Link to="/findway">
           <StyledFindWayIcon fill={menu === 2 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(2)} />
         </Link>
-        <Link to="/article">
-          <StyledArticleIcon stroke={menu === 3 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(3)} />
+        <Link to="/article" onClick={() => handleMenuClick(3)}>
+          {menu === 3 ? <StyledSelectedArticleIcon /> : <StyledArticleIcon />}
         </Link>
         <Link to="/bookMark">
           <StyledBookMarkIcon fill={menu === 4 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(4)} />
         </Link>
         <Link to="/login">
-          <StyledLoginIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
+          {!loggedInUser && (
+            <StyledLoginIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
+          )}
+          {loggedInUser && (
+            <StyledMyPageIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
+          )}
         </Link>
       </MainMenubar>
 
@@ -102,11 +113,19 @@ const StyledArticleIcon = styled(ArticleIcon)`
   margin-top: 30px;
 `;
 
+const StyledSelectedArticleIcon = styled(SelectedArticleIcon)`
+  margin-top: 30px;
+`;
+
 const StyledBookMarkIcon = styled(BookMarkIcon)`
   margin-top: 30px;
 `;
 
 const StyledLoginIcon = styled(LoginIcon)`
+  margin-top: 30px;
+`;
+
+const StyledMyPageIcon = styled(MyPageIcon)`
   margin-top: 30px;
 `;
 
