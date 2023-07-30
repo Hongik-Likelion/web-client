@@ -51,6 +51,8 @@ function MenuBar() {
           {!loggedInUser && (
             <StyledLoginIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
           )}
+        </Link>
+        <Link to="/myPage">
           {loggedInUser && (
             <StyledMyPageIcon fill={menu === 5 ? '#4AB2C9' : '#B6B6B6'} onClick={() => handleMenuClick(5)} />
           )}

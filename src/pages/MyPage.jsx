@@ -8,16 +8,13 @@ function MyPage() {
   const [kakaoProfileImg, setKakaoProfileImg] = useState('');
   const [kakaoEmail, setKakaoEmail] = useState('');
 
-  const [userDataFetched, setUserDataFetched] = useState(false);
   const [kakaoAccessToken, setKakaoAccessToken] = useState('');
 
   const { setLoggedInUser } = useContext(LoginInfo); // useContext 가져온 부분
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-
-    if (accessToken) {
-      setKakaoAccessToken(accessToken);
+    if (localStorage.getItem('kakaoAccessToken')) {
+      setKakaoAccessToken(localStorage.getItem('kakaoAccessToken'));
       setLoggedInUser(true);
     } else {
       // 로컬 스토리지에 액세스 토큰이 없는 경우 인가코드 받기부터 시작
@@ -54,7 +51,7 @@ function MyPage() {
         window.location.href = '/login';
       }
     }
-  }, [setLoggedInUser]);
+  }, [setLoggedInUser, kakaoAccessToken, setKakaoAccessToken]);
 
   useEffect(() => {
     if (kakaoAccessToken) {
@@ -71,6 +68,7 @@ function MyPage() {
           }
         )
         .then((res) => {
+          localStorage.setItem('kakaoAccessToken', kakaoAccessToken);
           console.log(res);
 
           const nickname = res.data.properties.nickname;
@@ -80,7 +78,6 @@ function MyPage() {
           setKakaoNickname(nickname);
           setKakaoProfileImg(profileImg);
           setKakaoEmail(email);
-          setUserDataFetched(true);
 
           axios
             .post('http://127.0.0.1:8000/users/oauth', {
@@ -89,8 +86,8 @@ function MyPage() {
             })
             .then((res) => {
               console.log('백엔드가 준 정보 : ', res);
-              console.log(res.data.token.access); //access_token
-              console.log(res.data.token.refresh); //refresh_token
+              console.log(res.data.token.access);
+              console.log(res.data.token.refresh);
 
               // 액세스 토큰을 로컬 스토리지에 저장
               const access_token = res.data.token.access;
@@ -100,7 +97,7 @@ function MyPage() {
               const refresh_token = res.data.token.access;
               localStorage.setItem('refresh_token', refresh_token);
 
-              setLoggedInUser(true); //정상적으로 로그인 되었음을 나타냄
+              setLoggedInUser(true);
             })
 
             .catch((error) => {
@@ -112,7 +109,7 @@ function MyPage() {
           console.error('에러에러 API request:', error);
         });
     }
-  }, [kakaoAccessToken]);
+  }, [kakaoAccessToken, kakaoEmail, kakaoNickname, setLoggedInUser]);
 
   // 로그아웃 부분
   const handleKakaoLogout = () => {
@@ -130,9 +127,12 @@ function MyPage() {
         )
         .then((res) => {
           console.log('카카오 로그아웃 성공:', res);
+
           setKakaoAccessToken(''); // 로그아웃 성공 후에 kakaoAccessToken 상태를 초기화
+          localStorage.removeItem('kakaoAccessToken'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
           localStorage.removeItem('access_token'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
           localStorage.removeItem('refresh_token'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
+
           setLoggedInUser(false);
           window.location.href = '/login'; // 로그아웃 성공 후 /login 페이지로 리다이렉트
         })
@@ -146,7 +146,7 @@ function MyPage() {
     <div>
       <MyPageSidebar>
         <Userbar>
-          {userDataFetched && <LogoutButtonImg src="/buttonImg/logoutButton.png" onClick={handleKakaoLogout} />}
+          {<LogoutButtonImg src="/buttonImg/logoutButton.png" onClick={handleKakaoLogout} />}
 
           <CircleImg>{kakaoProfileImg && <ProfileImg src={kakaoProfileImg} alt="Kakao Profile" />}</CircleImg>
           <EditButtonImg src="/buttonImg/editbutton.png" />
