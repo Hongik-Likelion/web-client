@@ -34,7 +34,7 @@ function MyPage() {
             {},
             {
               headers: {
-                'Content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+                'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
               },
             }
           )
@@ -45,8 +45,6 @@ function MyPage() {
             const { access_token } = data;
 
             setKakaoAccessToken(access_token);
-            // 액세스 토큰을 로컬 스토리지에 저장
-            localStorage.setItem('accessToken', access_token);
           })
           .catch((error) => {
             console.error('Error occurred during API request:', error);
@@ -73,7 +71,6 @@ function MyPage() {
           }
         )
         .then((res) => {
-          setLoggedInUser(true);
           console.log(res);
 
           const nickname = res.data.properties.nickname;
@@ -84,11 +81,35 @@ function MyPage() {
           setKakaoProfileImg(profileImg);
           setKakaoEmail(email);
           setUserDataFetched(true);
+
+          axios
+            .post('http://127.0.0.1:8000/users/oauth', {
+              email: kakaoEmail,
+              nickname: kakaoNickname,
+            })
+            .then((res) => {
+              console.log('백엔드가 준 정보 : ', res);
+              console.log(res.data.token.access); //access_token
+              console.log(res.data.token.refresh); //refresh_token
+
+              // 액세스 토큰을 로컬 스토리지에 저장
+              const access_token = res.data.token.access;
+              localStorage.setItem('access_token', access_token);
+
+              // refresh_token을 로컬 스토리지에 저장
+              const refresh_token = res.data.token.access;
+              localStorage.setItem('refresh_token', refresh_token);
+
+              setLoggedInUser(true); //정상적으로 로그인 되었음을 나타냄
+            })
+
+            .catch((error) => {
+              console.error('백엔드 서버 오류:', error);
+            });
         })
+
         .catch((error) => {
-          console.error('Error occurred during API request:', error);
-          // 만약 에러가 발생하면 로그아웃 처리 후 로그인 페이지로 이동
-          handleKakaoLogout();
+          console.error('에러에러 API request:', error);
         });
     }
   }, [kakaoAccessToken]);
@@ -110,7 +131,8 @@ function MyPage() {
         .then((res) => {
           console.log('카카오 로그아웃 성공:', res);
           setKakaoAccessToken(''); // 로그아웃 성공 후에 kakaoAccessToken 상태를 초기화
-          localStorage.removeItem('accessToken'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
+          localStorage.removeItem('access_token'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
+          localStorage.removeItem('refresh_token'); // 로그아웃 성공 시 로컬 스토리지에서 토큰 삭제
           setLoggedInUser(false);
           window.location.href = '/login'; // 로그아웃 성공 후 /login 페이지로 리다이렉트
         })
