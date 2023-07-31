@@ -38,8 +38,6 @@ function Login() {
     );
 }
 
-// isLogin ? <login /> : <logoiut/>
-// hasToken ? <p>로그아웃</p> : <p>로그인</p>
 const Sidebar = styled.div`
     position: fixed;
     top: 0;

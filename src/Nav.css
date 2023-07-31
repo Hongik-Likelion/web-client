@@ -118,7 +118,7 @@
     margin-top : 40px;
 }
 
-/* .mypageIcon {
+.mypageIcon {
     width:74px;
     height:74px;
     background-image: url('./icon/mypageIcon.svg');
@@ -132,4 +132,4 @@
     background-image: url('./icon/mypageSelectIcon.svg');
     background-size: cover;
     margin-top : 40px;
-} */
+}

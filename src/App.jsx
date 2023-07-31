@@ -1,6 +1,5 @@
 import React from 'react';
 //import logo from './logo.svg';
-// import './App.css';
 import { Map } from "react-kakao-maps-sdk";
 import Nav from './Nav';
 import { Route, Routes } from "react-router-dom";
@@ -13,8 +12,9 @@ import Login from "./pages/Login";
 import KakaoCallBack from "./pages/KakaoCallBack";
 
 function App() {
+  
   return (
-    <>  
+    <>
         <Nav></Nav>
       
         <Map className="map" // 지도를 표시할 Container
@@ -30,9 +30,10 @@ function App() {
           <Route path="/article" element={<Article />} />
           <Route path="/bookmark" element={<Bookmark />} />
           <Route path="/kakao-login" element={<Login />} />
-          <Route path="/oauth" element={<KakaoCallBack />} /> {/*리다이렉트 페이지*/}
+          <Route path="/oauth" element={<KakaoCallBack />} />
         </Routes>
     </>
+
   );
   
 }

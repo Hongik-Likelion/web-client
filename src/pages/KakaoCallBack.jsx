@@ -11,13 +11,13 @@ function KakaoCallBack() {
 
     useEffect(() => {
         const params = new URL(window.location.href).searchParams;
-        const code = params.get("code");
+        const code = params.get("code"); // 인가코드 담기
+
         const grant_type = "authorization_code";
         const REDIRECT_URI = `${process.env.REACT_APP_REDIRECT_URI}`; //eslint-disable-line no-unused-vars
         const REST_API_KEY = `${process.env.REACT_APP_REST_API_KEY}`; //eslint-disable-line no-unused-vars
-        // const CLIENT_SECRET = `${process.env.REACT_APP_CLIENT_SECRET}`; //eslint-disable-line no-unused-vars
-        // 401 에러
 
+        // 카카오서버 토큰 발급
         axios.post(
             `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`,
             {},
@@ -28,42 +28,72 @@ function KakaoCallBack() {
                 },
             }
         )
-        .then((response) => {
+        .then((response) => { // 카카오서버 토큰 발급 확인
+            console.log("카카오서버토큰 :");
             console.log(response);
             
-            const {data} = response;
-            const {access_token} = data;
+            // 카카오 서버 엑세스 토큰 이용해 유저 정보 가져오기
+            const kakao_access_token = response.data.access_token;
 
-            if (access_token) {
-                console.log(`Bearer ${access_token}`);
+            if (kakao_access_token) { // 카카오 서버 엑세스 토큰이 존재할 때
+                console.log(`Bearer ${kakao_access_token}`);
                 axios.post(
                     "https://kapi.kakao.com/v2/user/me",
                     {},
                     {
                         headers: {
-                            Authorization : `Bearer ${access_token}`,
+                            Authorization : `Bearer ${kakao_access_token}`,
                             "Content-type" : 
                                 "application/x-www-form-urlencoded",
                         },
                     }
                 )
-                .then((response) => {
-                    console.log("데이터 성공 : ");
+                .then((response) => { // 유저 정보 확인
+                    console.log("유저 정보 :");
                     console.log(response);
                     
                     setProfileImg(response.data.properties.profile_image);
                     setNickname(response.data.properties.nickname);
                     setEmail(response.data.kakao_account.email);
-                    
+
+                    // 제로 어라운드 자체 토큰 발급
+                    const email = response.data.kakao_account.email;
+                    const nickname = response.data.properties.nickname;
+                    axios.post(
+                        `http://localhost:8000/users/oauth`,
+                        {
+                            email, 
+                            nickname,
+                        }
+                    )
+                    .then((response) => { // 제로 어라운드 자체 토큰 발급 확인
+                        console.log("서비스자체토큰 :");
+                        console.log(response);
+
+                        // 로컬스토리지에 자체 토큰 저장하기
+                        const access_token = response.data.token.access;
+
+                        if (access_token) { // 서비스 자체 토큰이 존재할 때
+                            localStorage.setItem('access_token', access_token);
+                        }
+
+
+                    })
                 });
-            } else {
-                console.log("access_token 없음");
+            } else { // 카카오 서버 엑세스 토큰이 존재하지 않을 때
+                console.log("kakao_access_token 없음");
             }
         })
         .catch((error) => {
             console.log(error);
         });
     }, []);
+
+    // 로그아웃
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        window.location.href = '/kakao-login';
+    }
     
     return (
         <Sidebar>
@@ -73,6 +103,9 @@ function KakaoCallBack() {
                 <Nickname>
                     {nickname} 님
                 </Nickname>
+                <Logout onClick={handleLogout}>
+                    로그아웃
+                </Logout>
             </Bluebox>
 
             <Subbox>
@@ -183,4 +216,19 @@ const Text = styled.div`
     font-size: 15px;
     margin-left: 13px;
 `;
+
+const Logout = styled.div`
+    font-size: 13px;
+    color: #808080;
+    text-align: center;
+    background-color: #FFFFFF;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    width: 60px;
+    height: 18px;
+    position: fixed;
+    top: 20px;
+    left: 400px;
+`;
+
 export default KakaoCallBack;

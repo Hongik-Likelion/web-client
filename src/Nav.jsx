@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import "./Nav.css";
 import { Link } from "react-router-dom";
 import { styled } from 'styled-components';
@@ -9,6 +10,7 @@ function Nav() {
     
     return (
         <Navbar>
+
             <Icon>
                 <Link to="/main" onClick={() => setSelectNav(null)}>
                     <MainIcon></MainIcon>
@@ -33,18 +35,22 @@ function Nav() {
                     {(selectNav===5) && <div className="box" style={{top : `451px`}}></div>}
                 </Link>
                 
-                
                 <Link to="/kakao-login" onClick={() => setSelectNav(6)}>
                     <div className={selectNav === 6 ? "loginSelectIcon" : "loginIcon"}></div>
                     {(selectNav===6) && <div className="box" style={{top : `556px`}}></div>}
                 </Link>
 
-        
-                {/* <Link to="/oauth" onClick={() => setSelectNav(7)}>
-                    <div className={selectNav === 7 ? "mypageSelectIcon" : "mypageIcon"}></div>
-                    {(selectNav===7) && <div className="box" style={{top : `556px`}}></div>}
-                </Link> */}
-                
+                {/* {isLoggedIn ? (
+                    <Link to="/oauth" onClick={() => setSelectNav(7)}>
+                        <div className={selectNav === 7 ? "mypageSelectIcon" : "mypageIcon"}></div>
+                        {(selectNav===7) && <div className="box" style={{top : `556px`}}></div>}
+                    </Link>
+                ) : (
+                    <Link to="/kakao-login" onClick={() => setSelectNav(6)}>
+                        <div className={selectNav === 6 ? "loginSelectIcon" : "loginIcon"}></div>
+                        {(selectNav===6) && <div className="box" style={{top : `556px`}}></div>}
+                    </Link>
+                )} */}
             </Icon>
             {selectNav && <div className="highlight"></div>}
             
@@ -74,4 +80,5 @@ const MainIcon = styled.div`
     background-size: cover;
     margin-top : 40px;
 `;
+
 export default Nav;
